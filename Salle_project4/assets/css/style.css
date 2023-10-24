@@ -218,6 +218,17 @@ footer a {
     }
 
 
+
+    #weatherBar {
+      display: none;
+      background-color: white;
+      height:50px;
+      color: blue;
+      text-align: center;
+    }
+
+  
+
 @media only screen and (max-width: 576px) {
   header {
     background-image: url("../img/header-mini.png");

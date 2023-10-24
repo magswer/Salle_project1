@@ -71,3 +71,34 @@ if (response?.ok) {
     document.getElementById("weatherBar").style.display = "none";
 
   }
+
+
+
+
+  async function getCountries() {
+    console.log("getCountries")
+    let results = await fetch('https://countries.trevorblades.com', {
+      method: 'POST',
+  
+      headers: {
+        "Content-Type": "application/json"
+      },
+  
+      body: JSON.stringify({
+        query: `query getCountry {
+          country(code:"ES") {
+           name
+          emoji
+          capital
+          currency
+          }
+        }`
+      })
+    })
+    let countries = await results.json();
+    console.log(countries.data)
+    document.getElementById("easteregg").innerHTML = countries.data.country.name  + '' + countries.data.country.emoji + '' + countries.data.country.currency  + '' + countries.data.country.capital ;
+
+  }
+  
+  getCountries()

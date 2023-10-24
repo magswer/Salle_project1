@@ -228,6 +228,9 @@ footer a {
     }
 
   
+    #easteregg {
+      text-align: center;
+    }
 
 @media only screen and (max-width: 576px) {
   header {

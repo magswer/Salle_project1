@@ -85,20 +85,28 @@ if (response?.ok) {
       },
   
       body: JSON.stringify({
-        query: `query getCountry {
-          country(code:"ES") {
+        query: `query getCountries {
+          countries{
            name
           emoji
           capital
           currency
+          code
           }
         }`
       })
     })
     let countries = await results.json();
     console.log(countries.data)
-    document.getElementById("easteregg").innerHTML = countries.data.country.name  + '' + countries.data.country.emoji + '' + countries.data.country.currency  + '' + countries.data.country.capital ;
+
+
+
+let randomNumber = Math.floor(Math.random() * countries.data.countries.length);
+let randomcountry = countries.data.countries[randomNumber];
+
+console.log(randomcountry.name)
+ 
+document.getElementById("eastereggQuestion").innerHTML = "What is the capital of "+ randomcountry.name;
 
   }
-  
   getCountries()

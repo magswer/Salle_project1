@@ -34,10 +34,20 @@
       <h1>My Business Webpage</h1>
     </header>
 
-
     <nav id="weatherBar">
-      <span id="weather"></span>
-     <button onclick="hideWeatherBar()">hide</button>
+      <ul>
+        <li><span class="fa-solid fa-temperature-three-quarters"></span> <span id="temperature"></span></li>
+        <li><span class="fa-solid fa-location-dot"></span> <span id="city"></span></li>
+        <li><img id="mainImage"><span id="main"></span></li>
+        <li><span class="fa-solid fa-droplet"></span><span id="humidity"> </span></li>
+        <li><span class="fa-solid fa-wind"></span><span id="wind"> </span></li>
+        <li><button class="btn-close" onclick="hideWeatherBar()"></button></li>
+      </ul>
+
+
+
+
+    
     </nav>
 
     <nav class="navbar navbar-expand-sm navbar-dark">

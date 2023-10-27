@@ -146,7 +146,14 @@ async function getWeatherData(position) {
     const data = await response.json();
     console.log(data.main.temp);
     document.getElementById("weatherBar").style.display = "block";
-    document.getElementById("weather").innerHTML = data.main.temp + " C°";
+    document.getElementById("temperature").innerHTML = Math.round(data.main.temp) + " C°";
+    document.getElementById("city").innerHTML = data.name;
+    document.getElementById("main").innerHTML = data.weather[0].main;
+
+    document.getElementById("mainImage").src = "https://openweathermap.org/img/wn/"+data.weather[0].icon+".png";
+    document.getElementById("humidity").innerHTML = data.main.humidity + "%";
+    document.getElementById("wind").innerHTML = data.wind.speed + " m/s";
+
   } else {
     console.log(`HTTP Response Code: ${response?.status}`);
   }

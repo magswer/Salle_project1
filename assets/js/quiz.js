@@ -136,10 +136,13 @@ function showResult() {
 }
 
 function resetGame() {
+  const container = document.getElementById('fireworks');
+  const fireworks = new Fireworks.default(container);
+  fireworks.stop();
   document.getElementById("gameResult").style.display = "none";
-
   round = 0;
   points = 0;
   startRound();
+  
 }
 

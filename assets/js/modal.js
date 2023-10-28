@@ -1,65 +1,81 @@
 // This function creates the modal dialog
+function element(tag, options, children) { // Le pasaremos la etiqueta de lo que queremos crear, después los atributos  y los hijos
+    let {classNames: classNames, ...atributs} = options; 
 
-function createModal() {
-    console.log("create modal");
-
-    // Create a <div> elements for the modal 
-    const modal = document.createElement("div");
-    modal.id = "modal";
-    modal.classList.add("modal");
-
-    const modalContent = document.createElement("div");
-    modalContent.classList.add("modal-content");
-
-    const closeButton = document.createElement("span");
-    closeButton.innerText = "x";
-    closeButton.classList.add("close");
-    closeButton.addEventListener("click", closeModal);
-
-    // Create an <ul> element to hold the list of titles
-    const titleList = document.createElement("ul");
-    titleList.id = "titleList";
-
-    // Add everything to modal and body
-    modalContent.appendChild(closeButton);
-    modalContent.appendChild(titleList);
-    modal.appendChild(modalContent);
-
-    document.body.appendChild(modal);
+    const el = document.createElement(tag); // Guardará qué elemento vamos a crear en una variable
+    for (const child of children) { // Recorrerá los hijos que queremos añadir
+        el.append(child); // Los añadirá al padre
+    }
+    for (const className of classNames || []) { // Recorrerá las clases que queramos
+        el.classList.add(className); //Añadirá las clases
+    }
+    for (const atributName in atributs) { // Recorrerá el resto de atributos
+      el.setAttribute(atributName, atributs[atributName]); // Y los añadirá
+    }
+    return el; // Devuelve el elemento creado
 }
 
-// This function opens the modal and displays a list of h2 titles
-function openModal() {
-    console.log("openModal");
 
-    // Get the title list element
-    const titleList = document.getElementById("titleList");
-    titleList.innerHTML = "";
+// Función para crear el modal de ayuda
 
-  // Add H2 elements to list
-    const h2Elements = document.querySelectorAll("h2");
+function createModal()  {
 
-    h2Elements.forEach(function (h2) {
-        const title = h2.innerText;
-        const listItem = document.createElement("li");
-        listItem.innerText = title;
-        titleList.appendChild(listItem);
-    });
+  //let titulos = [...document.querySelectorAll('section[data-key]')] // Captura las secciones que saldrán en el modal
+  let titulos = [...document.querySelectorAll('section')] // Captura las secciones que saldrán en el modal
 
-    // Display modal
-    const modal = document.getElementById("modal");
-    modal.style.display = "block";
+  .map(section => { // Recorre las secciones para crear los li de la ul de secciones
+    if(section.dataset.key != 0){ // Si la sección no es 0
+
+      const key = section.dataset.key // Captura el data key
+
+      console.log("key: " + key);
+
+      const title = section.querySelector('h2').textContent // Captura el título
+      return element('li', {classNames : ['list-group-item']}, [element('kbd', {}, [key]), ' ', title]) // Crea el elemento li usando la función de crear elementos hecha antes, añadiendo la clase y el hijo que será un elemento nuevo con el parámetro de la variable key para el número de sección y el título de la misma
+    }
+  })
+
+  let modal = element('div', {classNames: ['modal', 'show']}, [ // Creamos el modal con la función de crear elementos
+    element('div', {classNames: ['modal-dialog']}, [ // Diferentes div con clases
+      element('div', {classNames: ['modal-content']}, [
+        element('div', {classNames: ['modal-header']}, [
+          element('h5', {classNames: ['modal-title']}, ['Help']), // El título del modal
+          element('button', {classNames: ['btn-close'], type: 'button', onclick: 'closeModal()'}, []) // El botón para cerrar la ventana
+        ]),
+        element('div', {classNames: ['modal-body']}, [element('p', {classNames: ['ms-2', 'fs-5']}, ['Select 1-5 to jump to webpage sections.']), // El título del modal
+
+          element('ul', {classNames : ['list-group']}, titulos) // Creamos la lista de secciones usando los titulos de antes
+        ])
+      ])
+    ])
+  ]);
+  return modal; // devuelve el modal construido
 }
 
-// This function closes the modal
-function closeModal() {
-    console.log("closeModal");
+// Funcion para añadir modal al segundo de cargar la página y quitarlo a los 5 segundos
 
-    // Get the modal element and hide it
-    const modal = document.getElementById("modal");
-    modal.style.display = "none";
+function addModal(){
+  console.log("Hola!!!!");
+  let modalToAdd = createModal(); // Llama a la función para crear el modal
+  document.body.appendChild(modalToAdd); // Lo añade al documento
+
+  console.log("=============================");
+  console.log(modalToAdd);
+
 }
 
-createModal();
-setTimeout(openModal, 1000);
-setTimeout(closeModal, 3000);
+function closeModal(){
+  let modalToClose = document.getElementsByClassName("modal"); // Captura el modal
+  if(modalToClose.length > 0) { // Si la array es más larga de 0, o sea, contiene un modal
+    modalToClose[0].remove(); // Quita el primer elemento de la array (el modal)
+  }
+}
+
+// Funcion para aÃ±adir modal al segundo de cargar la pÃ¡gina y quitarlo a los 5 segundos
+
+function addModal(){
+    let modalToAdd = createModal(); // Llama a la funciÃ³n para crear el modal
+    document.body.appendChild(modalToAdd); // Lo aÃ±ade al documento
+  }
+  setTimeout(addModal, 1000) // Para que se visualice en pantalla al segundo de cargar la pÃ¡gina
+  setTimeout(closeModal, 5000) // Para que desaparezca a los 5 segundos

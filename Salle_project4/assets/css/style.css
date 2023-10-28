@@ -241,30 +241,40 @@ footer a {
 }
 
 #easteregg {
-  text-align: center;
+padding: 50px;
+display: none;
 }
 
 .modal {
-  display: block;
-}
-
-.modal-title {
-  font-size: xx-large;
-  margin-top: 10px;
-}
-
-.modal-header {
-  border-bottom: 2px;
-  padding: 10px 20px 0 20px;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 25%;
+  width: 50%;
+  height: 20%;
+  z-index: 1;
 }
 
 .modal-content {
-  background: rgb(240, 236, 246);
-  background: linear-gradient(
-    90deg,
-    rgba(240, 236, 246, 1) 0%,
-    rgba(165, 158, 176, 1) 100%
-  );
+  background-color: #fff;
+  margin: 2% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 70%;
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  cursor: pointer;
+}
+
+#titleList {
+  list-style-type: none;
+  padding: 0;
 }
 
 @media only screen and (max-width: 576px) {

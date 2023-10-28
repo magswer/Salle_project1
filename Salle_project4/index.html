@@ -25,8 +25,11 @@
       integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
       crossorigin="anonymous"
     ></script>
+    <script src="assets/js/weatherbar.js"></script>
+    <script src="assets/js/quiz.js"></script>
       <script src="assets/js/scripts.js" async></script>
             <script src="assets/js/observer.js"></script>
+
 
   </head>
   <body>
@@ -84,6 +87,21 @@
         </div>
       </div>
     </nav>
+
+
+    <section id="easteregg" class="fadeup">
+      <h1>Quiz</h1>Ronda: <span id="rounds"></span><br>Puntos: <span id="points"></span><br><br>
+          <span id="eastereggQuestion"></span>
+          <br>
+          <form>
+      <input type="radio" id="answer1" name="quiz"> <label for="answer1" id="labelAnswer1"></label><br>
+      <input type="radio" id="answer2" name="quiz"> <label for="answer2" id="labelAnswer2"></label><br>
+      <input type="radio" id="answer3" name="quiz"> <label for="answer3" id="labelAnswer3"></label><br>
+      <span id="result"></span>
+      <button type="button" onclick="checkAnswer()">Submit</button><br>
+    </form>
+  
+          </section>
 
     <main>
       <section id="whoweare" class="fadeup" data-key="1">
@@ -434,17 +452,6 @@
         </article>
       </section>
 
-      <section id="easteregg" class="fadeup">
-    <h1>Quiz</h1>
-        <span id="eastereggQuestion"></span>
-        <br>
-    <input type="radio" name="answer1" value="Madrid">Madrid</input><br>
-    <input type="radio" name="answer2" value="Bucarest">Bucarest</input><br>
-    <input type="radio" name="answer3" value="Berlin">Berlin</input><br>
-    <button type="button" onclick="checkAnswer()">Submit</button><br>
-
-
-        </section>
 
 
     </main>
@@ -453,5 +460,14 @@
       <a href="https://www.salleurl.edu/" target="_blank">La Salle.</a> All
       Rights Reserved.
     </footer>
+
+
+ 
+
+
+
+
   </body>
+  <script src="assets/js/modal.js"></script>
+
 </html>
